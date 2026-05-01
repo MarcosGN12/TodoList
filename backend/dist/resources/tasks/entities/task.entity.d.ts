@@ -3,5 +3,5 @@ export declare class Task {
     name: string;
     description: string;
     endDate: Date;
-    state: boolean;
+    state: string;
 }

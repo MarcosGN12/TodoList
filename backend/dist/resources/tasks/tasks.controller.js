@@ -29,13 +29,13 @@ let TasksController = class TasksController {
         return this.tasksService.findAll();
     }
     findOne(id) {
-        return this.tasksService.findOne(+id);
+        return this.tasksService.findOne(Number(id));
     }
     update(id, updateTaskDto) {
-        return this.tasksService.update(+id, updateTaskDto);
+        return this.tasksService.update(Number(id), updateTaskDto);
     }
     remove(id) {
-        return this.tasksService.remove(+id);
+        return this.tasksService.remove(Number(id));
     }
 };
 exports.TasksController = TasksController;

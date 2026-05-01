@@ -37,7 +37,7 @@ __decorate([
 ], Task.prototype, "endDate", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", String)
 ], Task.prototype, "state", void 0);
 exports.Task = Task = __decorate([
     (0, typeorm_1.Entity)(),

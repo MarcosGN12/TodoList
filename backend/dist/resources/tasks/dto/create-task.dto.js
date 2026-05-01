@@ -34,8 +34,8 @@ __decorate([
     __metadata("design:type", Date)
 ], CreateTaskDto.prototype, "endDate", void 0);
 __decorate([
-    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", String)
 ], CreateTaskDto.prototype, "state", void 0);
 //# sourceMappingURL=create-task.dto.js.map

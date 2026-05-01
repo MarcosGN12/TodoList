@@ -11,6 +11,18 @@ services:
     ports:
       - "5440:5432"
 
+  todoList-test-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todoList-test
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+    ports:
+      - "5441:5432"
+
   todoList-pgadmin:
     image: dpage/pgadmin4
     restart: always

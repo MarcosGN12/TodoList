@@ -22,19 +22,34 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
+                envFilePath: `env/.${process.env.NODE_ENV}.env`,
+            }),
+            typeorm_module_1.TypeOrmModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (config) => {
+                    console.log({
+                        type: 'postgres',
+                        host: config.get('DB_HOST'),
+                        port: Number(config.get('DB_PORT')),
+                        username: 'postgres',
+                        password: 'postgres',
+                        database: config.get('DB_NAME'),
+                        entities: [task_entity_1.Task],
+                        synchronize: true,
+                    });
+                    return {
+                        type: 'postgres',
+                        host: config.get('DB_HOST'),
+                        port: Number(config.get('DB_PORT')),
+                        username: 'postgres',
+                        password: 'postgres',
+                        database: config.get('DB_NAME'),
+                        entities: [task_entity_1.Task],
+                        synchronize: true,
+                    };
+                },
             }),
             tasks_module_1.TasksModule,
-            typeorm_module_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: 'localhost',
-                port: 5440,
-                username: 'postgres',
-                password: 'postgres',
-                database: 'todoList-dev-db',
-                entities: [task_entity_1.Task],
-                synchronize: true,
-                autoLoadEntities: true,
-            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
