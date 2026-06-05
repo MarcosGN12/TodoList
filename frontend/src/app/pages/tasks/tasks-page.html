@@ -1,0 +1,83 @@
+<section class="flex flex-col items-center">
+  <h1 class="text-2xl p-4 font-bold">Lista de Tareas</h1>
+  <div class="w-4/5 flex">
+    <div class="w-1/5 m-2">
+      <modal-component title="Create task">
+        <form class="flex flex-col w-full max-w-xs mx-auto pt-4" method="dialog">
+          <div class="flex justify-start w-full">
+            <label class="font-medium">Title</label>
+          </div>
+          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+
+          <div class="flex justify-start w-full mt-3">
+            <label class="font-medium">Description</label>
+          </div>
+          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+
+          <div class="flex justify-start w-full mt-3">
+            <label class="font-medium">End Date</label>
+          </div>
+          <input type="date" placeholder="Type here" class="input input-bordered w-full" />
+
+          <div class="flex justify-start w-full mt-3">
+            <label class="font-medium">State</label>
+          </div>
+          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+
+          <button class="btn btn-info w-full mt-6">Send</button>
+        </form>
+      </modal-component>
+    </div>
+    <div class="w-4/5 m-2">
+      <input class="w-full input" type="text" placeholder="Find for name or description" />
+    </div>
+  </div>
+
+  <div class="w-4/5 overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <table class="table bg-base-300">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>End date</th>
+          <th>State</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Food</th>
+          <td>Prepare the food</td>
+          <td>11/06/2026</td>
+          <td>not started</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-primary m-2">Edit</button>
+            <button class="btn btn-sm btn-error m-2">Delete</button>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Food</th>
+          <td>Prepare the food</td>
+          <td>11/06/2026</td>
+          <td class="badge badge-warning">not started</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-primary m-2">Edit</button>
+            <button class="btn btn-sm btn-error m-2">Delete</button>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Food</th>
+          <td>Prepare the food</td>
+          <td>11/06/2026</td>
+          <td>not started</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-primary m-2">Edit</button>
+            <button class="btn btn-sm btn-error m-2">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

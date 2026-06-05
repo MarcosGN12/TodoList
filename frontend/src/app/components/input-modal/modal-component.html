@@ -1,0 +1,15 @@
+<button class="w-full btn btn-info" onclick="modal.showModal()">Create task</button>
+
+<dialog id="modal" class="modal">
+  <div class="modal-box relative">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+
+    <h3 class="font-bold text-lg">{{ title }}</h3>
+    <ng-content></ng-content>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

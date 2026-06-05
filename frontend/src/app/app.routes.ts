@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { Main } from './pages/main/main';
+import { TasksPage } from './pages/tasks/tasks-page';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Main,
+    component: TasksPage,
     canActivate: [],
   },
 ];

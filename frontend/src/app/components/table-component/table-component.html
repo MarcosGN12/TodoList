@@ -1,0 +1,21 @@
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <table class="table bg-base-300">
+        <thead>
+            <tr>
+                @for (column of columns; track $index) {
+                    <th>{{ column.label }}</th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (row of data; track $index) {
+                <tr>
+                    @for (column of columns; track $index) {
+                        <td>{{ row[column.key] }}</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
