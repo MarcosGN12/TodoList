@@ -1,6 +1,6 @@
-<button class="w-full btn btn-info" onclick="modal.showModal()">Create task</button>
+<button class="w-full btn btn-info" (click)="dialog.showModal()">{{ title }}</button>
 
-<dialog id="modal" class="modal">
+<dialog #dialog class="modal">
   <div class="modal-box relative">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

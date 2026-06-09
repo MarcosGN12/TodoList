@@ -7,24 +7,48 @@
           <div class="flex justify-start w-full">
             <label class="font-medium">Title</label>
           </div>
-          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+          <input
+            type="text"
+            [(ngModel)]="taskForm().name"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Type here"
+            class="input input-bordered w-full"
+          />
 
           <div class="flex justify-start w-full mt-3">
             <label class="font-medium">Description</label>
           </div>
-          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+          <input
+            type="text"
+            [(ngModel)]="taskForm().description"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Type here"
+            class="input input-bordered w-full"
+          />
 
           <div class="flex justify-start w-full mt-3">
             <label class="font-medium">End Date</label>
           </div>
-          <input type="date" placeholder="Type here" class="input input-bordered w-full" />
+          <input
+            type="date"
+            [(ngModel)]="taskForm().endDate"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Type here"
+            class="input input-bordered w-full"
+          />
 
           <div class="flex justify-start w-full mt-3">
             <label class="font-medium">State</label>
           </div>
-          <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+          <input
+            type="text"
+            [(ngModel)]="taskForm().state"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Type here"
+            class="input input-bordered w-full"
+          />
 
-          <button class="btn btn-info w-full mt-6">Send</button>
+          <button (click)="onSubmit()" class="btn btn-info w-full mt-6">Send</button>
         </form>
       </modal-component>
     </div>
@@ -45,38 +69,64 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>Food</th>
-          <td>Prepare the food</td>
-          <td>11/06/2026</td>
-          <td>not started</td>
-          <td class="text-center">
-            <button class="btn btn-sm btn-primary m-2">Edit</button>
-            <button class="btn btn-sm btn-error m-2">Delete</button>
-          </td>
-        </tr>
+        @for (task of tasks(); track task.id) {
+          <tr>
+            <th>{{ task.name }}</th>
+            <td>{{ task.description }}</td>
+            <td>{{ task.endDate }}</td>
+            <td>{{ task.state }}</td>
+            <td class="text-center">
+              <modal-component title="Edit task">
+                <form class="flex flex-col w-full max-w-xs mx-auto pt-4" method="dialog">
+                  <div class="flex justify-start w-full">
+                    <label class="font-medium">Title</label>
+                  </div>
+                  <input
+                    type="text"
+                    [(ngModel)]="task.name"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="input input-bordered w-full"
+                  />
 
-        <tr>
-          <th>Food</th>
-          <td>Prepare the food</td>
-          <td>11/06/2026</td>
-          <td class="badge badge-warning">not started</td>
-          <td class="text-center">
-            <button class="btn btn-sm btn-primary m-2">Edit</button>
-            <button class="btn btn-sm btn-error m-2">Delete</button>
-          </td>
-        </tr>
+                  <div class="flex justify-start w-full mt-3">
+                    <label class="font-medium">Description</label>
+                  </div>
+                  <input
+                    type="text"
+                    [(ngModel)]="task.description"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="input input-bordered w-full"
+                  />
 
-        <tr>
-          <th>Food</th>
-          <td>Prepare the food</td>
-          <td>11/06/2026</td>
-          <td>not started</td>
-          <td class="text-center">
-            <button class="btn btn-sm btn-primary m-2">Edit</button>
-            <button class="btn btn-sm btn-error m-2">Delete</button>
-          </td>
-        </tr>
+                  <div class="flex justify-start w-full mt-3">
+                    <label class="font-medium">End Date</label>
+                  </div>
+                  <input
+                    type="date"
+                    [(ngModel)]="task.endDate"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="input input-bordered w-full"
+                  />
+
+                  <div class="flex justify-start w-full mt-3">
+                    <label class="font-medium">State</label>
+                  </div>
+                  <input
+                    type="text"
+                    [(ngModel)]="task.state"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="input input-bordered w-full"
+                  />
+
+                  <button (click)="editTask(task)" class="btn btn-info w-full mt-6">
+                    Edit task
+                  </button>
+                </form>
+              </modal-component>
+              <button (click)="deleteTask(task)" class="w-full btn btn-error mt-2">Delete</button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
