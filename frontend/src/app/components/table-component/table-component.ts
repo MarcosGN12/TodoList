@@ -17,5 +17,4 @@ export class TableComponent<T> {
     this.shown = false;
     this.shownChange.emit(this.shown);
   }
-  dataStore = inject(TasksService<T>);
 }

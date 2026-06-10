@@ -18,8 +18,8 @@ export class TasksService {
     return await this.taskRepository.save(task);
   }
 
-  findAll() {
-    const tasks = this.taskRepository.find();
+  findAll(pageNumber: number = 0) {
+    const tasks = this.taskRepository.find({ take: 10, skip: pageNumber * 10 });
 
     return tasks;
   }

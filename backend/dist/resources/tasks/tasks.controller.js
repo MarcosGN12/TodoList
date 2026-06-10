@@ -25,8 +25,8 @@ let TasksController = class TasksController {
     create(createTaskDto) {
         return this.tasksService.create(createTaskDto);
     }
-    findAll() {
-        return this.tasksService.findAll();
+    findAll(page) {
+        return this.tasksService.findAll(page);
     }
     findOne(id) {
         return this.tasksService.findOne(Number(id));
@@ -48,8 +48,9 @@ __decorate([
 ], TasksController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('page')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], TasksController.prototype, "findAll", null);
 __decorate([

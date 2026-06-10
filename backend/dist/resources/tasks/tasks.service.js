@@ -26,8 +26,8 @@ let TasksService = class TasksService {
         const task = this.taskRepository.create(createTaskDto);
         return await this.taskRepository.save(task);
     }
-    findAll() {
-        const tasks = this.taskRepository.find();
+    findAll(pageNumber = 0) {
+        const tasks = this.taskRepository.find({ take: 10, skip: pageNumber * 10 });
         return tasks;
     }
     findOne(id) {
