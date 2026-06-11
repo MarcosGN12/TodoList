@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, Input, Output, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

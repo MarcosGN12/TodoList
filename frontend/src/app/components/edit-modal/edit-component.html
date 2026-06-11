@@ -1,6 +1,8 @@
-<svg lucidePencil class="w-6 h-6 text-white cursor-pointer" (click)="dialog.showModal()">
-  {{ title }}
-</svg>
+<button class="btn btn-info">
+  <svg lucidePencil class="w-4 h-6 text-white cursor-pointer" (click)="dialog.showModal()">
+    {{ title }}
+  </svg>
+</button>
 
 <dialog #dialog class="modal">
   <div class="modal-box relative">
