@@ -27,7 +27,10 @@ let TasksService = class TasksService {
         return await this.taskRepository.save(task);
     }
     findAll(pageNumber = 0) {
-        const tasks = this.taskRepository.find({ take: 10, skip: pageNumber * 10 });
+        const tasks = this.taskRepository.find({
+            take: 10,
+            skip: (pageNumber - 1) * 10,
+        });
         return tasks;
     }
     findOne(id) {

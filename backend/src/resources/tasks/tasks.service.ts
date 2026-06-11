@@ -19,7 +19,10 @@ export class TasksService {
   }
 
   findAll(pageNumber: number = 0) {
-    const tasks = this.taskRepository.find({ take: 10, skip: pageNumber * 10 });
+    const tasks = this.taskRepository.find({
+      take: 10,
+      skip: (pageNumber - 1) * 10,
+    });
 
     return tasks;
   }
