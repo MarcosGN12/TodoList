@@ -1,0 +1,17 @@
+<svg lucidePencil class="w-6 h-6 text-white cursor-pointer" (click)="dialog.showModal()">
+  {{ title }}
+</svg>
+
+<dialog #dialog class="modal">
+  <div class="modal-box relative">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+
+    <h3 class="font-bold text-lg">{{ title }}</h3>
+    <ng-content></ng-content>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

@@ -2,7 +2,7 @@
   <h1 class="text-2xl p-4 font-bold">Lista de Tareas</h1>
   <div class="w-4/5 flex">
     <div class="w-1/5 m-2">
-      <modal-component title="Create task">
+      <input-component title="Create task">
         <form class="flex flex-col w-full max-w-xs mx-auto pt-4" method="dialog">
           <div class="flex justify-start w-full">
             <label class="font-medium">Title</label>
@@ -38,7 +38,7 @@
           />
 
           <div class="flex justify-start w-full mt-3">
-            <label class="font-medium">State</label>
+            <label class="font-medium"><badge-component></badge-component></label>
           </div>
           <input
             type="text"
@@ -50,7 +50,7 @@
 
           <button (click)="onSubmit()" class="btn btn-info w-full mt-6">Send</button>
         </form>
-      </modal-component>
+      </input-component>
     </div>
     <div class="w-4/5 m-2">
       <input class="w-full input" type="text" placeholder="Find for name or description" />
@@ -75,8 +75,8 @@
             <td>{{ task.description }}</td>
             <td>{{ task.endDate }}</td>
             <td>{{ task.state }}</td>
-            <td class="text-center">
-              <modal-component title="Edit task">
+            <td class="flex justify-center">
+              <edit-component title="Edit task">
                 <form class="flex flex-col w-full max-w-xs mx-auto pt-4" method="dialog">
                   <div class="flex justify-start w-full">
                     <label class="font-medium">Title</label>
@@ -118,22 +118,24 @@
                     class="input input-bordered w-full"
                   />
 
-                  <button (click)="editTask(task)" class="btn btn-info w-full mt-6">
-                    Edit task
+                  <button (click)="onSubmit()" class="btn btn-info w-full mt-6 text-center">
+                    Send
                   </button>
                 </form>
-              </modal-component>
-              <button (click)="deleteTask(task)" class="w-full btn btn-error mt-2">Delete</button>
+              </edit-component>
+              <svg
+                lucideTrash
+                (click)="deleteTask(task)"
+                class="w-6 h-6 text-white cursor-pointer"
+              ></svg>
             </td>
           </tr>
         }
       </tbody>
     </table>
-    <!-- <div class="join flex justify-center my-4">
-      <button (click)="previusPage()" class="join-item btn">«</button>
-      <button class="join-item btn">Page {{ pageNumber() }}</button>
-      <button (click)="nextPage()" class="join-item btn">»</button>
-    </div> -->
-    <switch-pages-component></switch-pages-component>
+    <pagination-component
+      [pageNumber]="pageNumber()"
+      (pageChange)="currentPage($event)"
+    ></pagination-component>
   </div>
 </section>
