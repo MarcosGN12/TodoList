@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Task = void 0;
 const typeorm_1 = require("typeorm");
+const user_entity_1 = require("../../users/entities/user.entity");
 let Task = class Task {
     id;
     name;
     description;
     endDate;
     state;
+    user;
 };
 exports.Task = Task;
 __decorate([
@@ -39,6 +41,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Task.prototype, "state", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.tasks, { onDelete: 'CASCADE' }),
+    __metadata("design:type", user_entity_1.User)
+], Task.prototype, "user", void 0);
 exports.Task = Task = __decorate([
     (0, typeorm_1.Entity)(),
     (0, typeorm_1.Unique)(['id'])
