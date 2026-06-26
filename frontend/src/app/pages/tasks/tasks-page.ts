@@ -8,6 +8,7 @@ import { BadgeComponent } from '../../components/badge/badge-component';
 import { LucideTrash } from '@lucide/angular';
 import { EditComponent } from '../../components/edit-modal/edit-component';
 import { TaskToastComponent } from '../../components/task-toast/task-toast';
+import { Page } from '../../types/page';
 
 @Component({
   selector: 'tasks-page',
@@ -26,17 +27,21 @@ import { TaskToastComponent } from '../../components/task-toast/task-toast';
 export class TasksPage {
   constructor(private taskService: TasksService) {}
 
+  taskStateList: string[] = ['pending', 'working on', 'completed'];
+
   taskForm = signal<Task>({
     id: 0,
     name: '',
     description: '',
     endDate: '',
-    state: '',
+    state: this.taskStateList[0],
   });
 
-  tasks = signal<Task[]>([]);
-
-  pageNumber = signal(1);
+  taskPage = signal<Page<Task>>({
+    data: [],
+    currentPage: 1,
+    totalPages: 1,
+  });
 
   deleteAlert = signal(false);
   editAlert = signal(false);
@@ -46,12 +51,15 @@ export class TasksPage {
   }
 
   loadTasks() {
-    this.taskService.loadTasks(this.pageNumber()).subscribe((data: Task[]) => {
-      const cleanedTasks = data.map((task) => ({
+    this.taskService.loadTasks(this.taskPage().currentPage).subscribe((page: Page<Task>) => {
+      const cleanedTasks = page.data.map((task) => ({
         ...task,
-        endDate: task.endDate ? task.endDate.toString().split('T')[0] : '',
+        endDate: task.endDate.toString().split('T')[0],
       }));
-      this.tasks.set(cleanedTasks);
+      this.taskPage.set({
+        ...page,
+        data: cleanedTasks,
+      });
     });
   }
 
@@ -68,7 +76,7 @@ export class TasksPage {
       this.editAlert.set(true);
 
       setTimeout(() => {
-        this.deleteAlert.set(false);
+        this.editAlert.set(false);
       }, 3000);
     });
   }
@@ -86,7 +94,7 @@ export class TasksPage {
   }
 
   currentPage(page: number) {
-    this.pageNumber.set(page);
+    this.taskPage.update((current) => ({ ...current, currentPage: page }));
     this.loadTasks();
   }
 }

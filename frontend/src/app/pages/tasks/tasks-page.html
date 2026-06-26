@@ -11,7 +11,7 @@
             type="text"
             [(ngModel)]="taskForm().name"
             [ngModelOptions]="{ standalone: true }"
-            placeholder="Type here"
+            placeholder="Insert title"
             class="input input-bordered w-full"
           />
 
@@ -22,7 +22,7 @@
             type="text"
             [(ngModel)]="taskForm().description"
             [ngModelOptions]="{ standalone: true }"
-            placeholder="Type here"
+            placeholder="Insert description"
             class="input input-bordered w-full"
           />
 
@@ -33,20 +33,22 @@
             type="date"
             [(ngModel)]="taskForm().endDate"
             [ngModelOptions]="{ standalone: true }"
-            placeholder="Type here"
             class="input input-bordered w-full"
           />
 
           <div class="flex justify-start w-full mt-3">
             <label class="font-medium"><badge-component></badge-component></label>
           </div>
-          <input
-            type="text"
+
+          <select
             [(ngModel)]="taskForm().state"
             [ngModelOptions]="{ standalone: true }"
-            placeholder="Type here"
-            class="input input-bordered w-full"
-          />
+            class="select appearance-none"
+          >
+            @for (state of taskStateList; track $index) {
+              <option [value]="state">{{ state }}</option>
+            }
+          </select>
 
           <button (click)="onSubmit()" class="btn btn-info w-full mt-6">Send</button>
         </form>
@@ -78,7 +80,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (task of tasks(); track task.id) {
+        @for (task of taskPage().data; track task.id) {
           <tr>
             <th>{{ task.name }}</th>
             <td>{{ task.description }}</td>
@@ -120,12 +122,15 @@
                   <div class="flex justify-start w-full mt-3">
                     <label class="font-medium">State</label>
                   </div>
-                  <input
-                    type="text"
-                    [(ngModel)]="task.state"
+                  <select
+                    [(ngModel)]="taskForm().state"
                     [ngModelOptions]="{ standalone: true }"
-                    class="input input-bordered w-full"
-                  />
+                    class="select appearance-none"
+                  >
+                    @for (state of taskStateList; track $index) {
+                      <option [value]="state">{{ state }}</option>
+                    }
+                  </select>
 
                   <button (click)="editTask(task)" class="btn btn-info w-full mt-6 text-center">
                     Send
@@ -146,7 +151,8 @@
       </tbody>
     </table>
     <pagination-component
-      [pageNumber]="pageNumber()"
+      [pageNumber]="taskPage().currentPage"
+      [totalPages]="taskPage().totalPages"
       (pageChange)="currentPage($event)"
     ></pagination-component>
   </div>

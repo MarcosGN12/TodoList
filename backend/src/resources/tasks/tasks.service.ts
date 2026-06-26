@@ -4,6 +4,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Page } from '../../types/page.type';
 
 @Injectable()
 export class TasksService {
@@ -18,13 +19,23 @@ export class TasksService {
     return await this.taskRepository.save(task);
   }
 
-  findAll(pageNumber: number = 0) {
-    const tasks = this.taskRepository.find({
-      take: 10,
-      skip: (pageNumber - 1) * 10,
+  async findAll(pageNumber: number = 0): Promise<Page<Task>> {
+    const limit = 10;
+    const currentPage = pageNumber < 1 ? 1 : pageNumber;
+    const skip = (pageNumber - 1) * limit;
+
+    const [tasks, totalCount] = await this.taskRepository.findAndCount({
+      take: limit,
+      skip: skip,
     });
 
-    return tasks;
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return {
+      data: tasks,
+      currentPage: currentPage,
+      totalPages: totalPages,
+    };
   }
 
   findOne(id: number) {

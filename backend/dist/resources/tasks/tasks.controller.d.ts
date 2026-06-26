@@ -5,7 +5,7 @@ export declare class TasksController {
     private readonly tasksService;
     constructor(tasksService: TasksService);
     create(createTaskDto: CreateTaskDto): Promise<import("./entities/task.entity").Task>;
-    findAll(page: number): Promise<import("./entities/task.entity").Task[]>;
+    findAll(page: number): Promise<import("../../types/page.type").Page<import("./entities/task.entity").Task>>;
     findOne(id: string): Promise<import("./entities/task.entity").Task | null>;
     update(id: string, updateTaskDto: UpdateTaskDto): Promise<import("./entities/task.entity").Task>;
     remove(id: string): Promise<import("./entities/task.entity").Task>;

@@ -26,12 +26,20 @@ let TasksService = class TasksService {
         const task = this.taskRepository.create(createTaskDto);
         return await this.taskRepository.save(task);
     }
-    findAll(pageNumber = 0) {
-        const tasks = this.taskRepository.find({
-            take: 10,
-            skip: (pageNumber - 1) * 10,
+    async findAll(pageNumber = 0) {
+        const limit = 10;
+        const currentPage = pageNumber < 1 ? 1 : pageNumber;
+        const skip = (pageNumber - 1) * limit;
+        const [tasks, totalCount] = await this.taskRepository.findAndCount({
+            take: limit,
+            skip: skip,
         });
-        return tasks;
+        const totalPages = Math.ceil(totalCount / limit);
+        return {
+            data: tasks,
+            currentPage: currentPage,
+            totalPages: totalPages,
+        };
     }
     findOne(id) {
         const task = this.taskRepository.findOne({ where: { id } });

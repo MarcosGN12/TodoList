@@ -7,10 +7,10 @@ import { Component, computed, input } from '@angular/core';
   standalone: true,
 })
 export class BadgeComponent {
-  text = input<string>('Pending');
+  text = input<string>('State');
   type = input<'primary' | 'secondary' | 'success' | 'warning' | 'error'>('primary');
 
   badgeClass = computed(() => {
-    return `badge badge-${this.type()}`;
+    return `badge-${this.type()}`;
   });
 }

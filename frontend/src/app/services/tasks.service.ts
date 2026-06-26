@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Task } from '../types/task';
+import { Page } from '../types/page';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
 export class TasksService {
   constructor(private http: HttpClient) {}
 
-  loadTasks(page: number) {
-    return this.http.get<any[]>(`http://localhost:3000/tasks?page=${page}`);
+  loadTasks(page: number): Observable<Page<Task>> {
+    return this.http.get<Page<Task>>(`http://localhost:3000/tasks?page=${page}`);
   }
 
   createTask(data: any) {
